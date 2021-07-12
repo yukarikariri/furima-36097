@@ -8,8 +8,8 @@
 | encrypted_password | string     | null: false                    |
 | family_name        | string     | null: false                    |
 | first_name         | string     | null: false                    |
-| familyname_kana    | string     | null: false                    |
-| firstname_kana     | string     | null: false                    |
+| family_name_kana   | string     | null: false                    |
+| first_name_kana    | string     | null: false                    |
 | birthday           | date       | null: false                    |
 
 ### Association
@@ -32,7 +32,7 @@
 | user               | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :users
+- belongs_to :user
 - belongs_to :item_category
 - belongs_to :item_condition
 - belongs_to :delivery_charge
@@ -50,7 +50,7 @@
 
 ### Association
 - belongs_to :user
-- belongs_to :items
+- belongs_to :item
 - has_one :address
 
 
