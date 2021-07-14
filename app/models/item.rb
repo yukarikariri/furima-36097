@@ -10,6 +10,7 @@ class Item < ApplicationRecord
   belongs_to :user
 
   with_options presence: true do
+    validates :image
     validates :item_name
     validates :item_description
     validates :item_price
