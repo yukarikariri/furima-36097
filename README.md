@@ -33,11 +33,11 @@
 
 ### Association
 - belongs_to :user
-- belongs_to :item_category
-- belongs_to :item_condition
-- belongs_to :delivery_charge
+- belongs_to :category
+- belongs_to :condition
+- belongs_to :charge
 - belongs_to :prefecture
-- belongs_to :lead_time
+- belongs_to :leadtime
 - has_one :purchase
 
 
