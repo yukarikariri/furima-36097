@@ -84,6 +84,18 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Item price is invalid. Input half-width characters')
       end
+
+      it 'item_price(販売価格）に半角英数字混合では出品できない' do
+        @item.item_price = '3000yen'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Item price is invalid. Input half-width characters')
+      end
+
+      it 'item_price(販売価格）に半角英字のみでは出品できない' do
+        @item.item_price = 'yen'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Item price is invalid. Input half-width characters')
+      end
     end
   end
 end

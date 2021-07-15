@@ -7,7 +7,6 @@ function input (){
 
   priceInput.addEventListener("input", () => {
     const inputValue = priceInput.value;
-    console.log(inputValue)
     const taxPriceValue = Math.floor(inputValue*feeRate)
     taxPrice.innerHTML = taxPriceValue.toLocaleString('ja-JP')
     profit.innerHTML = (inputValue - taxPriceValue).toLocaleString('ja-JP')
