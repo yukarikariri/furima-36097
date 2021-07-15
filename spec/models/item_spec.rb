@@ -16,7 +16,6 @@ RSpec.describe Item, type: :model do
       it 'image(商品画像)が添付されていない場合、登録できない' do
         @item.image = nil
         @item.valid?
-        # binding.pry
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
 
@@ -33,31 +32,31 @@ RSpec.describe Item, type: :model do
       end
 
       it 'category_id(カテゴリー)が「0(---)」のとき、登録できない' do
-        @item.category_id = '0'
+        @item.category_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
 
       it 'condition_id(商品の状態）が「0(---)」のとき、登録できない' do
-        @item.condition_id = '0'
+        @item.condition_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Condition can't be blank")
       end
 
       it 'condition_id(配送料の負担）が「0(---)」のとき、登録できない' do
-        @item.charge_id = '0'
+        @item.charge_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Charge can't be blank")
       end
 
       it 'prefecture_id(発送元の地域）が「0(---)」のとき、登録できない' do
-        @item.prefecture_id = '0'
+        @item.prefecture_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
 
       it 'leadtime_id(発送までの日数）が「0(---)」のとき、登録できない' do
-        @item.leadtime_id = '0'
+        @item.leadtime_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Leadtime can't be blank")
       end
@@ -69,13 +68,13 @@ RSpec.describe Item, type: :model do
       end
 
       it 'item_price(販売価格）が299円以下のとき、登録できない' do
-        @item.item_price = '299'
+        @item.item_price = 299
         @item.valid?
         expect(@item.errors.full_messages).to include('Item price is out of setting range')
       end
 
       it 'item_price(販売価格）が10,000,000円以上のとき、登録できない' do
-        @item.item_price = '10000000'
+        @item.item_price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include('Item price is out of setting range')
       end
