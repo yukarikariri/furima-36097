@@ -74,7 +74,7 @@ RSpec.describe Item, type: :model do
       end
 
       it 'item_price(販売価格）が10,000,000円以上のとき、登録できない' do
-        @item.item_price = 10000000
+        @item.item_price = 10_000_000
         @item.valid?
         expect(@item.errors.full_messages).to include('Item price is out of setting range')
       end
@@ -102,7 +102,6 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('User must exist')
       end
-
     end
   end
 end
