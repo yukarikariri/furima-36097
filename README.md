@@ -67,4 +67,4 @@
 
 ### Association
 belongs_to :prefecture
-belongs_to :purchases
+belongs_to :purchase
