@@ -21,12 +21,10 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @purchase = Purchase.where(item_id: @item.id)
   end
 
   def edit
-    @purchase = Purchase.where(item_id: @item.id)
-    redirect_to root_path if @purchase.present?
+    redirect_to root_path if @item.purchase.present?
   end
 
   def update
