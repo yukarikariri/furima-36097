@@ -1,7 +1,7 @@
 class PurchaseAddress
   include ActiveModel::Model
   attr_accessor :postal_code, :prefecture_id, :town, :house_number, :building_name, :phone_number, :user_id, :item_id,
-                :item_price, :token
+                :token
 
   # バリデーション
   with_options presence: true do
@@ -11,7 +11,8 @@ class PurchaseAddress
     validates :house_number
     validates :phone_number, format: { with: /\A[0-9]+\z/, message: 'is invalid. Input only number' }
     validates :phone_number, length: { minimum: 10, message: 'is too short' }
-    validates :item_price
+    validates :user_id
+    validates :item_id
   end
 
   validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
