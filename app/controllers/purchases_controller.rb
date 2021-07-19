@@ -25,22 +25,22 @@ class PurchasesController < ApplicationController
   end
 
   def purchase_params
-    params.require(:purchase_address).permit(:postal_code, :prefecture_id, :town, :house_number, :building_name, :phone_number, :item_price, :token).merge(user_id: current_user.id, item_id: params[:item_id], item_price: @item.item_price, token: params[:token])
+    params.require(:purchase_address).permit(:postal_code, :prefecture_id, :town, :house_number, :building_name, :phone_number,
+                                             :item_price, :token).merge(user_id: current_user.id, item_id: params[:item_id],
+                                                                        item_price: @item.item_price, token: params[:token])
   end
 
   def move_to_edit
     purchase = Purchase.where(item_id: @item.id)
-    if purchase.present?
-      redirect_to root_path
-    end
+    redirect_to root_path if purchase.present?
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: purchase_params[:item_price],  # 商品の値段
-      card: purchase_params[:token],    # カードトークン
-      currency: 'jpy'                 # 通貨の種類（日本円）
+      card: purchase_params[:token],         # カードトークン
+      currency: 'jpy'                        # 通貨の種類（日本円）
     )
   end
 end
