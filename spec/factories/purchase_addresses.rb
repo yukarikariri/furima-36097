@@ -12,5 +12,7 @@ FactoryBot.define do
     house_number    { Faker::Address.building_number }
     phone_number    { Faker::Lorem.characters(number: 11, min_numeric: 11) }
     building_name   { Faker::Name.initials }
+    item_price      { Faker::Number.between(from: 300, to: 9_999_999) }
+    token           {"tok_abcdefghijk00000000000000000"}
   end
 end

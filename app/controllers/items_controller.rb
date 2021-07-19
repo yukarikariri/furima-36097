@@ -5,6 +5,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.includes(:user).order('created_at DESC')
+    @purchases = Purchase.all
   end
 
   def new
@@ -21,9 +22,14 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @purchase = Purchase.where(item_id: @item.id)
   end
 
   def edit
+    @purchase = Purchase.where(item_id: @item.id)
+    if @purchase.present?
+      redirect_to root_path
+    end
   end
 
   def update
