@@ -1,7 +1,7 @@
 class PurchasesController < ApplicationController
-  before_action :authenticate_user!, only: [:index, :create]
-  before_action :set_item, only: [:index, :create]
-  before_action :move_to_edit, only: [:index, :create]
+  before_action :authenticate_user!
+  before_action :set_item
+  before_action :move_to_index
 
   def index
     @purchase_address = PurchaseAddress.new
@@ -26,20 +26,19 @@ class PurchasesController < ApplicationController
 
   def purchase_params
     params.require(:purchase_address).permit(:postal_code, :prefecture_id, :town, :house_number, :building_name, :phone_number,
-                                             :token).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+                                             :token).merge(user_id: current_user.id, item_id: params[:item_id],
+                                                           token: params[:token])
   end
 
-  def move_to_edit
+  def move_to_index
     purchase = Purchase.where(item_id: @item.id)
-    if purchase.blank?
-      redirect_to root_path if @item.user_id == current_user.id
-    else
-      redirect_to root_path
-    end
+    # if purchase.blank? || @item.user_id == current_user.id
+    #   redirect_to root_path
+    # end
+    redirect_to root_path if purchase.blank? || @item.user_id == current_user.id
   end
 
   def pay_item
-    binding.pry
     Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: @item.item_price, # 商品の値段
