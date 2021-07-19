@@ -32,9 +32,6 @@ class PurchasesController < ApplicationController
 
   def move_to_index
     purchase = Purchase.where(item_id: @item.id)
-    # if purchase.blank? || @item.user_id == current_user.id
-    #   redirect_to root_path
-    # end
     redirect_to root_path if purchase.blank? || @item.user_id == current_user.id
   end
 
