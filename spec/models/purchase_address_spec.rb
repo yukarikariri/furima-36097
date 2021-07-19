@@ -69,12 +69,6 @@ RSpec.describe PurchaseAddress, type: :model do
         expect(@purchase_address.errors.full_messages).to include('Phone number is too short')
       end
 
-      it 'phone_number(電話番号)が12桁以上の場合、登録できない' do
-        @purchase_address.phone_number = '123456789012'
-        @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include('Phone number is invalid. Input only number')
-      end
-
       it 'phone_number(電話番号)に「-」が混入しているとき、登録できない' do
         @purchase_address.phone_number = '03-123-4567'
         @purchase_address.valid?
