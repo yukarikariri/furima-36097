@@ -32,7 +32,11 @@ class PurchasesController < ApplicationController
 
   def move_to_edit
     purchase = Purchase.where(item_id: @item.id)
-    redirect_to root_path if purchase.present?
+    if purchase.blank?
+      redirect_to root_path if @item.user_id == current_user.id
+    else
+      redirect_to root_path
+    end
   end
 
   def pay_item
